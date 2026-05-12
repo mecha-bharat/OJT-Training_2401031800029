@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makan</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        
+        header {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 10px 5% ;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Better spacing for links */
+        }
+
+        .logo-container { display: flex; align-items: center; }
+
+        .b1 { height: 60px; width: auto; } /* Adjusted logo size */
+        .b2 { height: 30px; width: 30px; border-radius: 50%; }
+
+        .nav-links {
+            display: flex;
+            
+            gap: 25px;
+            align-items: center;
+        }
+
+        a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: blue; }
+
+        /* Slideshow container */
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: 20px auto;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .mySlides { display: none; }
+
+        img { vertical-align: middle; width: 100%; height: 450px; object-fit: cover; }
+
+        /* Buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.3);
+        }
+
+        .next { right: 0; border-radius: 3px 0 0 3px; }
+        .prev:hover, .next:hover { background-color: rgba(0,0,0,0.8); }
+
+        .text {
+            color: #ffffff;
+            font-size: 20px;
+            padding: 15px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        .dot-container { text-align: center; margin-top: 10px; }
+
+        .dot {
+            cursor: pointer;
+            height: 12px;
+            width: 12px;
+            margin: 0 4px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active, .dot:hover { background-color: #717171; }
+
+        .fade { animation: fade 1.5s; }
+        @keyframes fade {
+            from {opacity: .4} to {opacity: 1}
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6ziJ8OZQCwK7snTqwvE9gLZAmuuuyHpFBSA&s" alt="Logo" class="b1">
+            </div>
+            
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">New</a>
+                <a href="#">Services</a>
+                <a href="#">Customer Care</a>
+                <a href="#" style="font-weight: bold;">Login/Register</a>
+                <img src="data:image/jpeg;base64,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" alt="User" class="b2">
+            </div>
+        </nav>
+    </header>
+
+    <div class="slideshow-container">
+        <!-- Slide 1 -->
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="https://market-resized.envatousercontent.com/previews/files/549337556/05_Frank.jpg?w=590&h=300&cf_fit=crop&crop=top&format=auto&q=85&s=437e58f4bfe94edda41283bfdef787a44a3522fa12d2f1dfafd346f29d672bd2" alt="House 1">
+           
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQfuT8BbGVw-QULECjkiOpg0Xwb6s43aP_LIw&s" alt="House 2">
+            
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQQE4CFenOve3_uyeZuM4D_XgEI7meE-r-TDQ&s" alt="House 3">
+            
+        </div>
+
+        <!-- Arrows -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <div class="dot-container">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <!-- Brand Collection Table -->
+<section style="padding:40px 5%;">
+
+    <h2 style="text-align:center; margin-bottom:20px;">
+        Popular Watches
+    </h2>
+
+    <table style="width:100%; border-collapse:collapse; text-align:center;">
+
+        <tr style="background:black; color:white;">
+            <th style="padding:15px; border:1px solid #ddd;">Category</th>
+            <th style="padding:15px; border:1px solid #ddd;">Model</th>
+            <th style="padding:15px; border:1px solid #ddd;">Features</th>
+            <th style="padding:15px; border:1px solid #ddd;">Price</th>
+        </tr>
+
+        <tr>
+            <td style="padding:12px; border:1px solid #ddd;">Luxury</td>
+            <td style="border:1px solid #ddd;">MK Classic X</td>
+            <td style="border:1px solid #ddd;">
+                Stainless Steel, Waterproof
+            </td>
+            <td style="border:1px solid #ddd;">₹14,999</td>
+        </tr>
+
+        <tr style="background:#f5f5f5;">
+            <td style="padding:12px; border:1px solid #ddd;">Sports</td>
+            <td style="border:1px solid #ddd;">MK Runner Pro</td>
+            <td style="border:1px solid #ddd;">
+                Shock Resistant, GPS
+            </td>
+            <td style="border:1px solid #ddd;">₹9,499</td>
+        </tr>
+
+        <tr>
+            <td style="padding:12px; border:1px solid #ddd;">Smart Watch</td>
+            <td style="border:1px solid #ddd;">MK Smart One</td>
+            <td style="border:1px solid #ddd;">
+                Heart Rate, Bluetooth
+            </td>
+            <td style="border:1px solid #ddd;">₹11,999</td>
+        </tr>
+
+        <tr style="background:#f5f5f5;">
+            <td style="padding:12px; border:1px solid #ddd;">Casual</td>
+            <td style="border:1px solid #ddd;">MK Everyday</td>
+            <td style="border:1px solid #ddd;">
+                Leather Strap, Lightweight
+            </td>
+            <td style="border:1px solid #ddd;">₹5,999</td>
+        </tr>
+
+    </table>
+
+</section>
+
+    <script>
+        
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+        }
+
+        setInterval(() => { plusSlides(1); }, 5000);
+    </script>
+
+</body>
+</html>
