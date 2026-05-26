@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SleepDiary.dev — Track Your Rest</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --ink: #0e0d12;
+      --paper: #f5f2ec;
+      --mist: #e8e4db;
+      --slate: #a09a8e;
+      --deep: #1b1830;
+      --moon: #c8c0f0;
+      --dream: #7b6de8;
+      --dusk: #2e2660;
+      --rose: #e8b4c0;
+      --gold: #d4a84b;
+      --night: #0a0818;
+    }
+
+    body {
+      font-family: 'Syne', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+  </style>
+</head>
+
+<body class="bg-[#f5f2ec] text-[#0e0d12] overflow-x-hidden">
+
+  <!-- NAVBAR -->
+  <nav class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-12 py-5 bg-[rgba(245,242,236,0.85)] backdrop-blur-xl border-b border-[#e8e4db]">
+
+    <a href="#" class="flex items-baseline text-[1.4rem] font-['Instrument_Serif'] text-[#1b1830] no-underline">
+      SleepDiary<span class="text-[#7b6de8]">.dev</span>
+    </a>
+
+    <ul class="hidden md:flex items-center gap-8 list-none uppercase tracking-[0.08em] text-[0.82rem]">
+      <li>
+        <a href="#features" class="text-[#a09a8e] hover:text-[#0e0d12] transition">
+          Features
+        </a>
+      </li>
+      <li>
+        <a href="#how" class="text-[#a09a8e] hover:text-[#0e0d12] transition">
+          How it works
+        </a>
+      </li>
+      <li>
+        <a href="#pricing" class="text-[#a09a8e] hover:text-[#0e0d12] transition">
+          Pricing
+        </a>
+      </li>
+      <li>
+        <a href="#about" class="text-[#a09a8e] hover:text-[#0e0d12] transition">
+          About
+        </a>
+      </li>
+    </ul>
+
+    <a href="#cta"
+       class="font-['DM_Mono'] text-[0.78rem] font-medium bg-[#1b1830] text-[#c8c0f0] px-6 py-2 rounded-full transition hover:bg-[#7b6de8] hover:-translate-y-[1px]">
+      Start free →
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="min-h-screen grid grid-cols-1 lg:grid-cols-2 items-center gap-16 px-6 md:px-12 pt-32 pb-20 relative overflow-hidden">
+
+    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_70%_60%_at_80%_50%,rgba(123,109,232,0.08)_0%,transparent_70%)]"></div>
+
+    <!-- LEFT -->
+    <div class="relative z-10">
+
+      <p class="font-['DM_Mono'] uppercase tracking-[0.14em] text-[0.72rem] text-[#7b6de8] flex items-center gap-3 mb-6">
+        <span class="w-8 h-px bg-[#7b6de8]"></span>
+        Sleep intelligence platform
+      </p>
+
+      <h1 class="font-['Instrument_Serif'] text-[clamp(3rem,5.5vw,5.5rem)] leading-[1.05] text-[#1b1830] mb-6">
+        Wake up to <em class="italic text-[#7b6de8]">better</em> rest, every night
+      </h1>
+
+      <p class="text-[#a09a8e] text-[1.05rem] leading-[1.9] max-w-[460px] mb-10">
+        A science-backed sleep diary that tracks your patterns, uncovers what disrupts your rest, and gives you a clear path to deeper, more restorative sleep.
+      </p>
+
+      <div class="flex items-center gap-6 flex-wrap">
+
+        <a href="#cta"
+           class="font-['DM_Mono'] text-[0.82rem] bg-[#1b1830] text-[#c8c0f0] px-8 py-4 rounded-full hover:bg-[#7b6de8] transition hover:-translate-y-1">
+          Begin your diary
+        </a>
+
+        <a href="#how"
+           class="font-['DM_Mono'] text-[0.8rem] text-[#a09a8e] hover:text-[#0e0d12] transition flex items-center gap-2">
+          See how it works →
+        </a>
+
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="bg-[#0a0818] rounded-[2rem] p-8 relative overflow-hidden">
+
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(123,109,232,0.3)_0%,transparent_65%)] pointer-events-none"></div>
+
+      <div class="flex justify-between items-start mb-8 relative z-10">
+
+        <div>
+          <p class="font-['DM_Mono'] uppercase tracking-[0.1em] text-[0.7rem] text-[rgba(200,192,240,0.5)]">
+            Tuesday, 25 May 2026
+          </p>
+
+          <p class="font-['Instrument_Serif'] text-[1.8rem] text-[#c8c0f0] mt-1">
+            Last night's sleep
+          </p>
+        </div>
+
+        <div class="text-right">
+          <span class="block font-['Instrument_Serif'] text-[3rem] leading-none text-[#c8c0f0]">
+            84
+          </span>
+
+          <span class="font-['DM_Mono'] uppercase tracking-[0.1em] text-[0.65rem] text-[rgba(200,192,240,0.45)]">
+            Sleep score
+          </span>
+        </div>
+
+      </div>
+
+      <!-- STAGES -->
+      <p class="font-['DM_Mono'] uppercase tracking-[0.1em] text-[0.65rem] text-[rgba(200,192,240,0.4)] mb-3 relative z-10">
+        Sleep stages
+      </p>
+
+      <div class="flex h-[10px] gap-[2px] mb-8 rounded-full overflow-hidden relative z-10">
+
+        <div class="flex-[0.5] rounded-full bg-[rgba(212,168,75,0.7)]"></div>
+        <div class="flex-[1.5] rounded-full bg-[rgba(123,109,232,0.8)]"></div>
+        <div class="flex-[3] rounded-full bg-[rgba(123,109,232,0.35)]"></div>
+        <div class="flex-[2] rounded-full bg-[#2e2660] border border-[rgba(123,109,232,0.5)]"></div>
+        <div class="flex-[1] rounded-full bg-[rgba(123,109,232,0.8)]"></div>
+        <div class="flex-[2] rounded-full bg-[rgba(123,109,232,0.35)]"></div>
+
+      </div>
+
+      <!-- LEGEND -->
+      <div class="flex flex-wrap gap-5 mb-8">
+
+        <div class="flex items-center gap-2 font-['DM_Mono'] text-[0.62rem] text-[rgba(200,192,240,0.4)]">
+          <span class="w-2 h-2 rounded-full bg-[rgba(212,168,75,0.7)]"></span>
+          Awake
+        </div>
+
+        <div class="flex items-center gap-2 font-['DM_Mono'] text-[0.62rem] text-[rgba(200,192,240,0.4)]">
+          <span class="w-2 h-2 rounded-full bg-[rgba(123,109,232,0.8)]"></span>
+          REM
+        </div>
+
+        <div class="flex items-center gap-2 font-['DM_Mono'] text-[0.62rem] text-[rgba(200,192,240,0.4)]">
+          <span class="w-2 h-2 rounded-full bg-[rgba(123,109,232,0.35)]"></span>
+          Light
+        </div>
+
+        <div class="flex items-center gap-2 font-['DM_Mono'] text-[0.62rem] text-[rgba(200,192,240,0.4)]">
+          <span class="w-2 h-2 rounded-full bg-[#2e2660] border border-[rgba(123,109,232,0.5)]"></span>
+          Deep
+        </div>
+
+      </div>
+
+      <!-- SVG -->
+      <div class="relative h-[100px] mb-10">
+
+        <svg class="absolute bottom-0 left-0 right-0 w-full"
+             viewBox="0 0 380 80"
+             preserveAspectRatio="none">
+
+          <defs>
+            <linearGradient id="wg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7b6de8" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#7b6de8" stop-opacity="0.05"/>
+            </linearGradient>
+          </defs>
+
+          <path d="M0,60 C20,60 25,20 45,20 C65,20 70,50 90,50 C100,50 105,10 130,10 C155,10 160,50 180,50 C200,50 205,5 230,5 C255,5 260,45 280,45 C300,45 305,15 320,15 C340,15 350,55 380,55 L380,80 L0,80 Z"
+                fill="url(#wg)"/>
+
+          <path d="M0,60 C20,60 25,20 45,20 C65,20 70,50 90,50 C100,50 105,10 130,10 C155,10 160,50 180,50 C200,50 205,5 230,5 C255,5 260,45 280,45 C300,45 305,15 320,15 C340,15 350,55 380,55"
+                fill="none"
+                stroke="#7b6de8"
+                stroke-width="1.5"
+                opacity="0.8"/>
+        </svg>
+
+        <div class="absolute bottom-0 left-0 right-0 h-px bg-[rgba(200,192,240,0.12)]"></div>
+
+        <div class="absolute -bottom-5 left-0 right-0 flex justify-between font-['DM_Mono'] text-[0.6rem] text-[rgba(200,192,240,0.3)]">
+          <span>10 PM</span>
+          <span>12 AM</span>
+          <span>2 AM</span>
+          <span>4 AM</span>
+          <span>6 AM</span>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="grid grid-cols-3 gap-3 mt-8">
+
+        <div class="bg-[rgba(255,255,255,0.04)] border border-[rgba(200,192,240,0.1)] rounded-2xl p-4">
+          <p class="font-['DM_Mono'] uppercase tracking-[0.08em] text-[0.6rem] text-[rgba(200,192,240,0.35)] mb-1">
+            Duration
+          </p>
+
+          <span class="font-['Instrument_Serif'] text-[1.6rem] text-[#c8c0f0]">
+            7<span class="text-[0.75rem] ml-1">h 42m</span>
+          </span>
+        </div>
+
+        <div class="bg-[rgba(255,255,255,0.04)] border border-[rgba(200,192,240,0.1)] rounded-2xl p-4">
+          <p class="font-['DM_Mono'] uppercase tracking-[0.08em] text-[0.6rem] text-[rgba(200,192,240,0.35)] mb-1">
+            Deep sleep
+          </p>
+
+          <span class="font-['Instrument_Serif'] text-[1.6rem] text-[#c8c0f0]">
+            1<span class="text-[0.75rem] ml-1">h 18m</span>
+          </span>
+        </div>
+
+        <div class="bg-[rgba(255,255,255,0.04)] border border-[rgba(200,192,240,0.1)] rounded-2xl p-4">
+          <p class="font-['DM_Mono'] uppercase tracking-[0.08em] text-[0.6rem] text-[rgba(200,192,240,0.35)] mb-1">
+            Efficiency
+          </p>
+
+          <span class="font-['Instrument_Serif'] text-[1.6rem] text-[#c8c0f0]">
+            91<span class="text-[0.75rem] ml-1">%</span>
+          </span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="bg-[#1b1830] py-14 px-6 md:px-12 grid grid-cols-2 lg:grid-cols-4">
+
+    <div class="text-center border-r border-[rgba(200,192,240,0.08)] p-6 reveal">
+      <span class="block font-['Instrument_Serif'] text-[3rem] text-[#c8c0f0]">
+        120k+
+      </span>
+
+      <span class="text-[0.8rem] text-[rgba(200,192,240,0.4)]">
+        nights logged
+      </span>
+    </div>
+
+    <div class="text-center border-r border-[rgba(200,192,240,0.08)] p-6 reveal reveal-delay-1">
+      <span class="block font-['Instrument_Serif'] text-[3rem] text-[#c8c0f0]">
+        38 min
+      </span>
+
+      <span class="text-[0.8rem] text-[rgba(200,192,240,0.4)]">
+        avg. improvement
+      </span>
+    </div>
+
+    <div class="text-center border-r border-[rgba(200,192,240,0.08)] p-6 reveal reveal-delay-2">
+      <span class="block font-['Instrument_Serif'] text-[3rem] text-[#c8c0f0]">
+        94%
+      </span>
+
+      <span class="text-[0.8rem] text-[rgba(200,192,240,0.4)]">
+        better mornings
+      </span>
+    </div>
+
+    <div class="text-center p-6 reveal reveal-delay-3">
+      <span class="block font-['Instrument_Serif'] text-[3rem] text-[#c8c0f0]">
+        4.9★
+      </span>
+
+      <span class="text-[0.8rem] text-[rgba(200,192,240,0.4)]">
+        user rating
+      </span>
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-28 px-6 md:px-12">
+
+    <p class="font-['DM_Mono'] uppercase tracking-[0.14em] text-[0.72rem] text-[#7b6de8] flex items-center gap-3 mb-4 reveal">
+      <span class="w-6 h-px bg-[#7b6de8]"></span>
+      What we track
+    </p>
+
+    <h2 class="font-['Instrument_Serif'] text-[clamp(2.5rem,4vw,4rem)] leading-[1.15] text-[#1b1830] mb-16 reveal">
+      Everything that shapes<br/>
+      your night's rest
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1.5px] bg-[#e8e4db] border border-[#e8e4db] rounded-[1.5rem] overflow-hidden">
+
+      <div class="bg-[#f5f2ec] hover:bg-white transition p-10 reveal">
+        <span class="text-3xl block mb-5">🌙</span>
+
+        <h3 class="font-['Instrument_Serif'] text-[1.5rem] text-[#1b1830] mb-3">
+          Nightly diary
+        </h3>
+
+        <p class="text-[#a09a8e] text-[0.92rem] leading-8">
+          Log your bedtime, wake time, notes, mood, and any factors affecting your sleep — all in under 60 seconds.
+        </p>
+      </div>
+
+      <div class="bg-[#f5f2ec] hover:bg-white transition p-10 reveal reveal-delay-1">
+        <span class="text-3xl block mb-5">📊</span>
+
+        <h3 class="font-['Instrument_Serif'] text-[1.5rem] text-[#1b1830] mb-3">
+          Pattern analysis
+        </h3>
+
+        <p class="text-[#a09a8e] text-[0.92rem] leading-8">
+          Our algorithm surfaces correlations you'd never notice: the wine on Thursdays, the late workouts, the screen habits.
+        </p>
+      </div>
+
+      <div class="bg-[#f5f2ec] hover:bg-white transition p-10 reveal reveal-delay-2">
+        <span class="text-3xl block mb-5">😴</span>
+
+        <h3 class="font-['Instrument_Serif'] text-[1.5rem] text-[#1b1830] mb-3">
+          Sleep score
+        </h3>
+
+        <p class="text-[#a09a8e] text-[0.92rem] leading-8">
+          A single number that captures duration, timing, consistency, and quality.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta"
+           class="bg-[#7b6de8] py-28 px-6 text-center relative overflow-hidden">
+
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_80%_at_50%_0%,rgba(255,255,255,0.12)_0%,transparent_70%)]"></div>
+
+    <div class="relative z-10">
+
+      <h2 class="font-['Instrument_Serif'] text-[clamp(2.5rem,4vw,4rem)] text-white mb-4">
+        Begin your sleep diary tonight
+      </h2>
+
+      <p class="text-[rgba(255,255,255,0.7)] text-lg mb-10">
+        Free forever. No credit card required.
+      </p>
+
+      <div class="flex justify-center gap-3 flex-wrap">
+
+        <input
+          type="email"
+          placeholder="your@email.com"
+          class="w-[300px] bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.25)] text-white px-6 py-4 rounded-full outline-none placeholder:text-[rgba(255,255,255,0.4)]"
+        />
+
+        <button class="bg-white text-[#2e2660] px-8 py-4 rounded-full font-['DM_Mono'] text-[0.82rem] hover:bg-[#c8c0f0] transition hover:-translate-y-[1px]">
+          Create free account →
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="about" class="bg-[#0a0818] px-6 md:px-12 py-20">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+      <div>
+        <p class="font-['Instrument_Serif'] text-[1.7rem] text-[#c8c0f0] mb-4">
+          SleepDiary<span class="text-[#7b6de8]">.dev</span>
+        </p>
+
+        <p class="text-[rgba(200,192,240,0.35)] leading-8 text-[0.9rem]">
+          A sleep intelligence platform built by sleep researchers and developers.
+        </p>
+      </div>
+
+      <div>
+        <h5 class="font-['DM_Mono'] uppercase tracking-[0.12em] text-[0.68rem] text-[rgba(200,192,240,0.3)] mb-5">
+          Product
+        </h5>
+
+        <ul class="space-y-3 text-[0.85rem] text-[rgba(200,192,240,0.45)]">
+          <li><a href="#" class="hover:text-[#c8c0f0]">Features</a></li>
+          <li><a href="#" class="hover:text-[#c8c0f0]">Integrations</a></li>
+          <li><a href="#" class="hover:text-[#c8c0f0]">API Docs</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="font-['DM_Mono'] uppercase tracking-[0.12em] text-[0.68rem] text-[rgba(200,192,240,0.3)] mb-5">
+          Company
+        </h5>
+
+        <ul class="space-y-3 text-[0.85rem] text-[rgba(200,192,240,0.45)]">
+          <li><a href="#" class="hover:text-[#c8c0f0]">About</a></li>
+          <li><a href="#" class="hover:text-[#c8c0f0]">Careers</a></li>
+          <li><a href="#" class="hover:text-[#c8c0f0]">Blog</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="font-['DM_Mono'] uppercase tracking-[0.12em] text-[0.68rem] text-[rgba(200,192,240,0.3)] mb-5">
+          Support
+        </h5>
+
+        <ul class="space-y-3 text-[0.85rem] text-[rgba(200,192,240,0.45)]">
+          <li><a href="#" class="hover:text-[#c8c0f0]">Help Center</a></li>
+          <li><a href="#" class="hover:text-[#c8c0f0]">Privacy</a></li>
+          <li><a href="#" class="hover:text-[#c8c0f0]">Terms</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="border-t border-[rgba(200,192,240,0.08)] pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+
+      <span class="font-['DM_Mono'] text-[0.7rem] text-[rgba(200,192,240,0.25)]">
+        © 2026 SleepDiary.dev — All rights reserved
+      </span>
+
+      <span class="font-['DM_Mono'] text-[0.7rem] uppercase tracking-[0.08em] text-[rgba(200,192,240,0.2)]">
+        Made with 🌙 for restless humans
+      </span>
+
+    </div>
+
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
